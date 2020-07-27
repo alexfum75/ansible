@@ -1,0 +1,15 @@
+- hosts: 127.0.0.1
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: copy configuration
+    copy: 
+      src: /home/itam/ansible/foo.conf
+      dest: /home/itam/ansible/foo_cp.conf
+    notify:
+      - restart apache
+  handlers:
+  - name: restart apache 
+    service: 
+      name: apache2  
+      state: restarted 

@@ -1,0 +1,9 @@
+- hosts: 127.0.0.1
+  become: yes
+  become_method: sudo
+  vars:
+    http_port: 8080
+  tasks:
+  - name: print IP address
+    debug: 
+      msg: "{% for host in groups['webservers'] %} {{ hostvars[host]['ansible_host'] }} {% endfor %}"
